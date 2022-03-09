@@ -18,7 +18,7 @@ export default function RouterManager(router){
 	router.post('/admin', verifyAdmin);
 	router.post('/admin/list', getAll);
 	router.post('/admin/create', createPost);
-	router.post('/admin/update', updatePost);
+	router.post('/admin/update/:id', updatePost);
 	router.post('/admin/remove', removePost);
 	return router;
 };
