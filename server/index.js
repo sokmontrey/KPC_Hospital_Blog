@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import RouterManager from './Routes/RouterManager.js';
-import { create } from './Controllers/DatabaseController.js';
+import { create, getMany } from './Controllers/DatabaseController.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,9 +15,3 @@ app.listen(PORT, ()=>{
 });
 app.use('/api', RouterManager(express.Router()));
 
-create({
-	title: "title",
-	description: "description test",
-	image: ["image1", "image2"],
-	markdown: "markdown code test"
-});
