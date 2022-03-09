@@ -6,7 +6,7 @@ mongoose.connect(mongoDB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 
 // params:
 // 		data: Object
-// 		callback: (err, id: String)
+//callback: (err, id: String)
 export async function create(data, callback){
 	await PostModel.create(data, (err, result)=>{
 		err? callback(err, null) : callback(err, result._id);
@@ -53,5 +53,14 @@ export async function getMany(index, limit, callback){
 		.exec((err, result)=>{
 			callback(err, result);
 		});
+}
+
+// params:
+// 		callback: (err, result: [String])
+export async function getAllID(callback){
+	PostModel.find({}, (err, result)=>{
+		let idArray = result.map(item=>item._id);
+		callback(err, idArray);
+	});
 }
 
