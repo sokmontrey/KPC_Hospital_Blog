@@ -25,6 +25,16 @@ export function getAll(req, res){
 		else _sendResponse(res,true,'succes',idAndTitleList)
 	});
 }
+
+/* req.body = {
+	data:{
+		title: String,
+		description: String,
+		markdown: String,
+		images: [String],
+		createAt: Date,
+	}
+} */
 export function createPost(req, res){
 	if(!_checkAdmin(req, res)) return;
 
@@ -36,6 +46,16 @@ export function createPost(req, res){
 		else _sendResponse(res,true,'success',id);
 	});
 }
+
+/* req.body = {
+	data:{
+		title: String,
+		description: String,
+		markdown: String,
+		images: [String],
+		createAt: Date,
+	}
+} */
 export function updatePost(req, res){
 	if(!_checkAdmin(req, res)) return;
 
@@ -48,6 +68,7 @@ export function updatePost(req, res){
 		else _sendResponse(res,true,'success',isUpdated);
 	});
 }
+
 export function removePost(req, res){
 	if(!_checkAdmin(req, res)) return;
 
@@ -58,6 +79,7 @@ export function removePost(req, res){
 		else _sendResponse(res,true,'success',isRemoved);
 	});
 }
+
 export function verifyAdmin(req, res){
 	const correctHashed = '0f9ad3e17c5372d623e09dd556c445571a15445eee0fb9066808a3ed6b61eb17';
 

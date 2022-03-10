@@ -19,7 +19,7 @@ export default function RouterManager(router){
 	router.get('/admin/list', getAll);
 	router.post('/admin/create', createPost);
 	router.post('/admin/update/:id', updatePost);
-	router.post('/admin/remove', removePost);
+	router.get('/admin/remove', removePost);
 	return router;
 };
 

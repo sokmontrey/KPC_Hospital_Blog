@@ -18,7 +18,7 @@ export async function create(data, callback){
 // 		newData: Object
 // 		callback: (err, isUpdated:bool)
 export async function update(id, newData, callback){
-	await PostModel.findOneAndUpdate({_id: id}, newData, (err)=>{
+	PostModel.findOneAndUpdate({_id: id}, newData, (err)=>{
 		err? callback(err, false) : callback(err, true);
 	});
 }
