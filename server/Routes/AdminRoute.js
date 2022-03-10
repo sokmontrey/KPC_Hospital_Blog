@@ -69,7 +69,6 @@ export function verifyAdmin(req, res){
 		.digest('hex');
 
 	const isCorrect = hashed === correctHashed;
-	res.session.admin = isCorrect;
 	_sendResponse(res,
 		isCorrect,
 		isCorrect?'Logged In':'Incorrect Password', 
