@@ -27,7 +27,7 @@ export async function update(id, newData, callback){
 // 		id: String
 // 		callback: (err, isRemoved:bool)
 export async function remove(id, callback){
-	await PostModel.deleteOne({_id: id}, (err)=>{
+	PostModel.deleteOne({_id: id}, (err)=>{
 		err? callback(err, false) : callback(null, true);
 	});
 }
