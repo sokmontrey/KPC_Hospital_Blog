@@ -1,11 +1,11 @@
 import crypto from 'crypto';
-
 import {
 	getAllIdAndTitle,
 	create,
 	update,
 	remove,
 } from '../Controllers/DatabaseController.js';
+import { _sendResponse } from './commonRouteFunctions.js';
 
 function _checkAdmin(req, res){
 	if(!req.session.admin){
@@ -16,21 +16,13 @@ function _checkAdmin(req, res){
 	}
 	return true;
 }
-//sent responce function
-function _sendRes(res, isSuccess, message, payload){
-	res.status(isSuccess ? 200 : 501).send({ 
-		success: isSuccess,
-		message: message,
-		payload: payload
-	});
-}
 
 export function getAll(req, res){
 	if(!_checkAdmin(req, res)) return;
 
 	getAllIdAndTitle((err, idAndTitleList)=>{
-		if(err) _sendRes(res,false,err,null)
-		else _sendRes(res,true,'succes',idAndTitleList)
+		if(err) _sendResponse(res,false,err,null)
+		else _sendResponse(res,true,'succes',idAndTitleList)
 	});
 }
 export function createPost(req, res){
@@ -40,8 +32,8 @@ export function createPost(req, res){
 	const data = body.data;
 
 	create(data, (err, id)=>{
-		if(err) _sendRes(res,false,err,null)
-		else _sendRes(res,true,'success',id);
+		if(err) _sendResponse(res,false,err,null)
+		else _sendResponse(res,true,'success',id);
 	});
 }
 export function updatePost(req, res){
@@ -52,8 +44,8 @@ export function updatePost(req, res){
 	const id = req.params.id;
 
 	update(id, newData, (err, isUpdated)=>{
-		if(err) _sendRes(res,false,err,null);
-		else _sendRes(res,true,'success',isUpdated);
+		if(err) _sendResponse(res,false,err,null);
+		else _sendResponse(res,true,'success',isUpdated);
 	});
 }
 export function removePost(req, res){
@@ -62,8 +54,8 @@ export function removePost(req, res){
 	const id = req.params.id;
 
 	remove(id, (err, isRemoved)=>{
-		if(err) _sendRes(res,false,err,null);
-		else _sendRes(res,true,'success',isRemoved);
+		if(err) _sendResponse(res,false,err,null);
+		else _sendResponse(res,true,'success',isRemoved);
 	});
 }
 export function verifyAdmin(req, res){
@@ -78,8 +70,8 @@ export function verifyAdmin(req, res){
 
 	const isCorrect = hashed === correctHashed;
 	res.session.admin = isCorrect;
-	res.status(isCorrect? 200 : 401).send({
-		success: isCorrect,
-		message: isCorrect? 'Admin logged in' : 'Wrong password'
-	});
+	_sendResponse(res,
+		isCorrect,
+		isCorrect?'Logged In':'Incorrect Password', 
+		null);
 }

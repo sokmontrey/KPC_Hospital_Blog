@@ -2,14 +2,7 @@ import {
 	getMany,
 	getOne,
 } from '../Controllers/DatabaseController.js';
-
-function _sendRes(res, isSuccess, message, payload){
-	res.status(isSuccess ? 200 : 501).send({ 
-		success: isSuccess,
-		message: message,
-		payload: payload
-	});
-}
+import { _sendResponse } from './commonRouteFunctions.js';
 
 export async function getHomePost(req, res){
 	const body = req.body;
@@ -19,14 +12,14 @@ export async function getHomePost(req, res){
 	var skip = index * limit;
 
 	await getMany(skip, limit, (err, results)=>{
-		if(err) _sendRes(res, false, err, null);
-		else _sendRes(res, true, 'Success', results);
+		if(err) _sendResponse(res, false, err, null);
+		else _sendResponse(res, true, 'Success', results);
 	});
 }
 export async function viewPost(req, res){
 	const id = req.params.id;
 	await getOne(id, (err, result)=>{
-		if(err) _sendRes(res, false, err, null);
-		else _sendRes(res, true, 'Success', result);
+		if(err) _sendResponse(res, false, err, null);
+		else _sendResponse(res, true, 'Success', result);
 	});
 }
