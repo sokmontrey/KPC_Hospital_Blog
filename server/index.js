@@ -3,7 +3,6 @@ import bodyParser from 'body-parser';
 import session from 'express-session';
 
 import RouterManager from './Routes/RouterManager.js';
-import { create, getMany } from './Controllers/DatabaseController.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -17,7 +16,7 @@ app.listen(PORT, ()=>{
 app.use(session({
 	secret: '12345678',
 	resave: true,
-	saveUninitialized: true
+	saveUninitialized: true,
 }));
 app.use('/api', RouterManager(express.Router()));
 

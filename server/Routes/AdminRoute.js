@@ -9,7 +9,7 @@ import { _sendResponse } from './commonRouteFunctions.js';
 
 function _checkAdmin(req, res){
 	if(!req.session.admin){
-		res.status(401) .send({ 
+		res.status(401).send({ 
 			success: false,
 			message: 'Not authorized' 
 		}); return false;
@@ -69,6 +69,7 @@ export function verifyAdmin(req, res){
 		.digest('hex');
 
 	const isCorrect = hashed === correctHashed;
+	req.session.admin = isCorrect;
 	_sendResponse(res,
 		isCorrect,
 		isCorrect?'Logged In':'Incorrect Password', 
