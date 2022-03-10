@@ -69,10 +69,13 @@ export function updatePost(req, res){
 	});
 }
 
+/* req = {
+	id: String
+} */
 export function removePost(req, res){
 	if(!_checkAdmin(req, res)) return;
 
-	const id = req.params.id;
+	const id = req.body.id;
 
 	remove(id, (err, isRemoved)=>{
 		if(err) _sendResponse(res,false,err,null);
