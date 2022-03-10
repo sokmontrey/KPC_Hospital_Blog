@@ -35,8 +35,8 @@ export async function remove(id, callback){
 // params:
 // 		id: String
 // 		callback: (err, result: Object)
-export async function getOne(id, callback){
-	await PostModel.findOne({_id: id}, (err, result)=>{
+export function getOne(id, callback){
+	PostModel.findOne({_id: id}).exec((err, result)=>{
 		callback(err, result);
 	});
 }
@@ -45,7 +45,7 @@ export async function getOne(id, callback){
 // 		startIndex: Number 
 // 		resultLength: Number 
 // 		callback: (err, result: [Objects])
-export async function getMany(index, limit, callback){
+export function getMany(index, limit, callback){
 	PostModel.find({})
 		.sort({createAt: -1})
 		.skip(index)
