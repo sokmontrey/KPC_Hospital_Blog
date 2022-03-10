@@ -11,14 +11,14 @@ export async function getHomePost(req, res){
 	var skip = index * limit;
 
 	await getMany(skip, limit, (err, results)=>{
-		if(err) res.status(500).send(err);
+		if(err) res.status(500).send({error: err});
 		else res.status(200).send({ postList: results });
 	});
 }
 export async function viewPost(req, res){
 	const id = req.params.id;
 	await getOne(id, (err, result)=>{
-		if(err) res.status(500).send(err);
+		if(err) res.status(500).send({error: err});
 		else res.status(200).send({ post: result });
 	});
 }
