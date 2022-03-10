@@ -5,9 +5,8 @@ import {
 import { _sendResponse } from './commonRouteFunctions.js';
 
 export function getHomePost(req, res){
-	const body = req.body;
-	const index = body.index || 0;
-	const limit = 10;
+	const index = req.params.index || 0;
+	const limit = 2;
 
 	var skip = index * limit;
 
