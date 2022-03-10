@@ -56,11 +56,16 @@ export async function getMany(index, limit, callback){
 }
 
 // params:
-// 		callback: (err, result: [String])
-export async function getAllID(callback){
+// 		callback: (err, result: [{_id: String, title: String}])
+export async function getAllIdAndTitle(callback){
 	PostModel.find({}, (err, result)=>{
-		let idArray = result.map(item=>item._id);
-		callback(err, idArray);
+		let ID_Title_Array = result.map(item=>{
+			return {
+				id: item._id,
+				title: item.title
+			}
+		});
+		callback(err, ID_Title_Array);
 	});
 }
 
