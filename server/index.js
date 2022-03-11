@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import session from 'express-session';
+import cors from 'cors';
 
 import RouterManager from './Routes/RouterManager.js';
 
@@ -18,5 +19,7 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true,
 }));
+//enable cors
+app.use(cors());
 app.use('/api', RouterManager(express.Router()));
 
