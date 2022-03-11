@@ -4,7 +4,7 @@ import session from 'express-session';
 
 import RouterManager from './Routes/RouterManager.js';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Create express app
 const app = express();
