@@ -12,7 +12,17 @@ export function getHomePost(req, res){
 
 	getMany(skip, limit, (err, results)=>{
 		if(err) _sendResponse(res, false, err, null);
-		else _sendResponse(res, true, 'Success', results);
+		else {
+			const newList = results.map((post)=>{
+				return {
+					title: post.title,
+					description: post.description,
+					createAt: post.createAt,
+					_id: post._id
+				}
+			}) 
+			_sendResponse(res, true, 'Success', newList);
+		}
 	});
 }
 export function viewPost(req, res){
