@@ -16,7 +16,7 @@ export default function Home(){
 		_fetchHomePost(index, setHomePostObj);
 	}, [index]);
 
-	return ( <div className='home-container'>
+	return ( <div id='home-container'>
 		<Topbar isAdmin={false} />
 		<div id='latest-text' className='row row-left row-middle'>
 			<p className='bold-text gray'>Latest Post</p>

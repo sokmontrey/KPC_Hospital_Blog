@@ -10,8 +10,6 @@ export function Topbar(props){
 }
 
 export function PostInfo(props){
-	//TODO: use <mark> to select random words and assign random color
-
 	return (<div onClick={props.onClick}
 		className='postInfo-container col col-middle col-left'>
 
@@ -24,6 +22,7 @@ export function PostInfo(props){
 		<p className='bold-text gray small-text'> {props.createAt} </p>
 	</div>); 
 }
+
 function _markText(text){
 	const splitedText = text.split(' ');
 	let theRest = ' ';
