@@ -36,9 +36,12 @@ function PostList(props){
 			title={post.title}
 			description={post.description}
 			createAt={post.createAt}
+			onClick={()=>{_viewPost(post._id)}}
 		/>
 	);
 }
+
+function _viewPost(id){ window.location.href = `/view/${id}`; }
 
 function _fetchHomePost(index, setHomePostObj){
 	const limit = 4;

@@ -12,7 +12,9 @@ export function Topbar(props){
 export function PostInfo(props){
 	//TODO: use <mark> to select random words and assign random color
 
-	return (<div className='postInfo-container col col-middle col-left'>
+	return (<div onClick={props.onClick}
+		className='postInfo-container col col-middle col-left'>
+
 		<p className='style-text black'> 
 			{_markText(props.title)}
 		</p>
