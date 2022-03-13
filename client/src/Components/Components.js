@@ -8,6 +8,13 @@ export function Topbar(props){
 		</p>
 	</div>);
 }
+export function BackButton(){
+	return (<button 
+		onClick={()=>{ window.history.back(); }}
+		className='button3 back-button-container'>
+		back
+	</button>);
+}
 
 export function PostInfo(props){
 	return (<div onClick={props.onClick}

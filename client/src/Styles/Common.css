@@ -71,3 +71,14 @@
 .yellow-highlight {
   background-color: var(--yellow-highlight);
 }
+
+/* input */
+.button3{
+	background: transparent;
+}
+.button3:hover{
+	transform: translate(0, -0.2rem);
+}
+.button3:active{
+	transform: translate(0, 0.2rem);
+}

@@ -1,1 +1,11 @@
+button{
+	border: none;
+	outline: none;
 
+	font-family: var(--bold-font);
+	font-weight: bold;
+	font-size: var(--small-size);
+
+	padding: calc(var(--padding)*0.5) var(--padding);
+	transition: all 0.15s ease-in-out;
+}

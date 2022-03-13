@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import { Topbar, PostInfo } from '../Components/Components.js';
+import { BackButton, Topbar, PostInfo } from '../Components/Components.js';
 import { GetViewPost } from '../Controllers/FetchController.js';
 
 import '../Styles/View.css';
@@ -20,6 +20,7 @@ export default function View(){
 	}, [id]);
 
 	return (<div id='view-container'>
+		<BackButton />
 		<Topbar isAdmin={false} />
 		<PostInfoElement postObj={postObj}/>
 	</div>);

@@ -7,3 +7,10 @@
   margin: 0 calc(var(--padding) * 0.5);
   transition: all 0.3s ease-in-out;
 }
+
+.back-button-container{
+	position: fixed;
+	top: 0;
+	left: 0;
+	color: var(--less-dark-color);
+}
