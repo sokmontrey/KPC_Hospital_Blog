@@ -26,7 +26,7 @@ export function getHomePost(req, res){
 	});
 }
 export function viewPost(req, res){
-	const id = req.params.id;
+	const id = req.params.id || 0;
 	getOne(id, (err, result)=>{
 		if(err) _sendResponse(res, false, err, null);
 		else _sendResponse(res, true, 'Success', result);

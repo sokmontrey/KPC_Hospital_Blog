@@ -12,7 +12,7 @@ import {
 } from './AdminRoute.js';
 
 export default function RouterManager(router){
-	router.get('/:index/:limit', getHomePost);
+	router.get('/home/:index/:limit', getHomePost);
 	router.get('/view/:id', viewPost);
 
 	router.post('/admin', verifyAdmin);
