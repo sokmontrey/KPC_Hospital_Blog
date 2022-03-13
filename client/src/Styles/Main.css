@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Raleway&family=Ubuntu:wght@500&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  font-size: 16px;
+
+  --style-font: "DM Serif Display", serif;
+  --bold-font: "Ubuntu", sans-serif;
+  --read-font: "RaleWay", sans-serif;
+
+  --small-size: 1.225rem;
+  --large-size: 2.5rem;
+  --medium-size: 1.51rem;
+
+  --gray-color: #c8b8ab;
+  --dark-color: #48433b;
+  --light-color: #eeeeee;
+  --less-dark-color: #716d68;
+  --back-color: #f1e6d6;
+
+  --red-highlight: #fba2a2;
+  --green-highlight: #94ebac;
+  --blue-highlight: #92c7f8;
+  --yellow-highlight: #d5e768;
+
+  --padding: 2rem;
+}
+
+body {
+  background-color: var(--back-color);
+}

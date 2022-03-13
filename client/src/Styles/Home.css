@@ -1,0 +1,7 @@
+#latest-text {
+  padding-left: var(--padding);
+}
+#post-list-container {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+}
