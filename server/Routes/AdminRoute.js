@@ -1,6 +1,7 @@
+//TODO: create get with select
 import crypto from 'crypto';
 import {
-	getAllIdAndTitle,
+	getAll_Title_CreateAt,
 	create,
 	update,
 	remove,
@@ -20,9 +21,9 @@ function _checkAdmin(req, res){
 export function getAll(req, res){
 	if(!_checkAdmin(req, res)) return;
 
-	getAllIdAndTitle((err, idAndTitleList)=>{
+	getAll_Title_CreateAt((err, result)=>{
 		if(err) _sendResponse(res,false,err,null)
-		else _sendResponse(res,true,'succes',idAndTitleList)
+		else _sendResponse(res,true,'succes',result)
 	});
 }
 

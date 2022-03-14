@@ -57,15 +57,12 @@ export function getMany(index, limit, callback){
 
 // params:
 // 		callback: (err, result: [{_id: String, title: String}])
-export async function getAllIdAndTitle(callback){
-	PostModel.find({}, (err, result)=>{
-		let ID_Title_Array = result.map(item=>{
-			return {
-				id: item._id,
-				title: item.title
-			}
-		});
-		callback(err, ID_Title_Array);
-	});
+export function getAll_Title_CreateAt(callback){
+	PostModel.find({})
+		.sort({createAt: -1})
+		.select({_id: 1, title: 1, createAt: 1})
+		.exec((err, result)=>{
+			callback(err, result);
+		})
 }
 
