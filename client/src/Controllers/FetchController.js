@@ -25,6 +25,18 @@ export function GetViewPost(id, callback){
 	}
 }
 
+export function GetAdminPost(callback){
+	try{
+		fetch(API + '/admin/list')
+			.then(response => response.json())
+			.then(data => {
+				callback(data.success, data.message, data.payload);
+			});
+	}catch(e){
+		callback(false, e.message, null);
+	}
+}
+
 export function SubmitAdminLogin(password, callback){
 	try{
 		// make a post fetch at API + /admin with data {password: password}
