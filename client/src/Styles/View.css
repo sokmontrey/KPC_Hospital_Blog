@@ -1,0 +1,7 @@
+#view-container{
+	padding: 0 20%;
+}
+
+#view-container .postInfo-container{
+	padding-bottom: var(--padding);
+}

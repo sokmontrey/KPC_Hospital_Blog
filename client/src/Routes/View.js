@@ -25,6 +25,10 @@ export default function View(){
 		<PostInfoElement postObj={postObj}/>
 	</div>);
 }
+function MarkdownContainer(props){
+	const markdown = props.markdown;
+	//TODO:
+}
 
 function PostInfoElement(props){
 	//TODO: add message to return 

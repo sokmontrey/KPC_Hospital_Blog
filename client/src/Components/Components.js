@@ -26,8 +26,15 @@ export function PostInfo(props){
 
 		<p className='read-text less-black'> {props.description} </p>
 
-		<p className='bold-text gray small-text'> {props.createAt} </p>
+		<p className='bold-text gray small-text'> 
+			{_getHowLongDay(props.createAt)} days ago
+		</p>
 	</div>); 
+}
+
+function _getHowLongDay(date){
+	var difference = new Date().getTime() - new Date(date).getTime();
+	return Math.ceil(difference / (1000 * 3600 * 24));
 }
 
 function _markText(text){
