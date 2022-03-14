@@ -1,5 +1,8 @@
 //TODO: create get with select
 import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
+
 import {
 	getAll_Title_CreateAt,
 	create,
@@ -8,23 +11,34 @@ import {
 } from '../Controllers/DatabaseController.js';
 import { _sendResponse } from './commonRouteFunctions.js';
 
-function _checkAdmin(req, res){
-	if(!req.session.admin){
-		res.status(401).send({ 
-			success: false,
-			message: 'Not authorized' 
-		}); return false;
-	}
-	return true;
+function _sendNotAuthorized(res){
+	res.status(401)
+		.send({ 
+			success:false, 
+			message: 'Not Authorized' 
+		})
+	return false;
+}
+
+function _checkAdmin(req, res, callback){
+	const authHeader = req.headers.authorization;
+	const token = authHeader && authHeader.split(' ')[1];
+	if(!token) callback(_sendNotAuthorized(res));
+
+	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err) => {
+		if(err) callback(_sendNotAuthorized(res));
+		callback(true);
+	})
 }
 
 export function getAll(req, res){
-	if(!_checkAdmin(req, res)) return;
-
-	getAll_Title_CreateAt((err, result)=>{
-		if(err) _sendResponse(res,false,err,null)
-		else _sendResponse(res,true,'succes',result)
-	});
+	_checkAdmin(req, res, (isSuccess)=>{
+		if(!isSuccess) return;
+		getAll_Title_CreateAt((err, result)=>{
+			if(err) _sendResponse(res,false,err,null)
+			else _sendResponse(res,true,'succes',result)
+		});
+	})
 }
 
 /* req.body = {
@@ -37,14 +51,16 @@ export function getAll(req, res){
 	}
 } */
 export function createPost(req, res){
-	if(!_checkAdmin(req, res)) return;
+	_checkAdmin(req, res, (isSuccess)=>{
+		if(!isSuccess) return;
 
-	const body = req.body;
-	const data = body.data;
+		const body = req.body;
+		const data = body.data;
 
-	create(data, (err, id)=>{
-		if(err) _sendResponse(res,false,err,null)
-		else _sendResponse(res,true,'success',id);
+		create(data, (err, id)=>{
+			if(err) _sendResponse(res,false,err,null)
+			else _sendResponse(res,true,'success',id);
+		});
 	});
 }
 
@@ -58,30 +74,34 @@ export function createPost(req, res){
 	}
 } */
 export function updatePost(req, res){
-	if(!_checkAdmin(req, res)) return;
+	_checkAdmin(req, res, (isSuccess)=>{
+		if(!isSuccess) return;
 
-	const body = req.body;
-	const newData = body.data;
-	const id = req.params.id;
+		const body = req.body;
+		const newData = body.data;
+		const id = req.params.id;
 
-	update(id, newData, (err, isUpdated)=>{
-		if(err) _sendResponse(res,false,err,null);
-		else _sendResponse(res,true,'success',isUpdated);
-	});
+		update(id, newData, (err, isUpdated)=>{
+			if(err) _sendResponse(res,false,err,null);
+			else _sendResponse(res,true,'success',isUpdated);
+		});
+	})
 }
 
 /* req = {
 	id: String
 } */
 export function removePost(req, res){
-	if(!_checkAdmin(req, res)) return;
+	_checkAdmin(req, res, (isSuccess)=>{
+		if(!isSuccess) return;
 
-	const id = req.body.id;
+		const id = req.body.id;
 
-	remove(id, (err, isRemoved)=>{
-		if(err) _sendResponse(res,false,err,null);
-		else _sendResponse(res,true,'success',isRemoved);
-	});
+		remove(id, (err, isRemoved)=>{
+			if(err) _sendResponse(res,false,err,null);
+			else _sendResponse(res,true,'success',isRemoved);
+		});
+	}) 
 }
 
 export function verifyAdmin(req, res){
@@ -95,9 +115,16 @@ export function verifyAdmin(req, res){
 		.digest('hex');
 
 	const isCorrect = hashed === correctHashed;
-	req.session.admin = isCorrect;
-	_sendResponse(res,
-		isCorrect,
-		isCorrect?'Logged In':'Incorrect Password', 
-		null);
+
+	var accessToken;
+	if(isCorrect){
+		const admin = { name: 'admin'}
+		accessToken = jwt.sign(admin, process.env.ACCESS_TOKEN_SECRET);
+	}
+
+	res.status(isCorrect? 200 : 401).send({
+		success: isCorrect,
+		message: isCorrect? 'logged in' : 'wrong password',
+		accessToken: accessToken
+	});
 }
