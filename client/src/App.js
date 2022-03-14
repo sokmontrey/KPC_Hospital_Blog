@@ -16,11 +16,11 @@ function App() {
 
 		<Route path='/view/:id' element={<View />}/>
 
-		<Route path='/admin' exact />
+		<Route path='/admin' exact element={<AdminLogin />}/>
 
-		<Route path='/admin/list' exact />
+		<Route path='/admin/list' exact element={<AdminList/>}/>
 
-		<Route path='/admin/create' exact />
+		<Route path='/admin/create' exact element={<AdminCreate />}/>
 	</Routes>);
 }
 

@@ -1,0 +1,12 @@
+#adminLogin-container{
+	width: 100%;
+}
+
+#adminLogin-container button,
+#adminLogin-container input{
+	width: 30%;
+}
+
+#adminLogin-container input{
+	margin: var(--padding) 0;
+}

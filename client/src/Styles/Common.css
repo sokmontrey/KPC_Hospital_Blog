@@ -72,7 +72,20 @@
   background-color: var(--yellow-highlight);
 }
 
-/* input */
+/* button*/
+.button1{
+	color: var(--dark-color);
+	background-color: var(--primary-color);
+	border-radius: var(--radius);
+}
+.button1:hover{
+	transform: translate(0,-0.2rem);
+}
+.button1:active{
+	transform: translate(0, 0.2rem);
+	background-color: var(--gray-color);
+}
+
 .button3{
 	background: transparent;
 }
@@ -81,4 +94,18 @@
 }
 .button3:active{
 	transform: translate(0, 0.2rem);
+}
+
+/* input*/
+.input1{
+	padding: calc(var(--padding) * 0.55) var(--padding);
+	background-color: var(--panel-color);
+	border-radius: var(--radius);
+	border: none;
+
+	color: var(--dark-color);
+
+	font-size: var(--small-size);
+	font-family: var(--read-font);
+	font-weight: bold;
 }

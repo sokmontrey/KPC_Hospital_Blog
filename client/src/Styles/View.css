@@ -5,3 +5,7 @@
 #view-container .postInfo-container{
 	padding-bottom: var(--padding);
 }
+
+#postMarkdown-container{
+	padding: 0 var(--padding);
+}

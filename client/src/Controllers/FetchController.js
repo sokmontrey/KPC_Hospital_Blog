@@ -24,3 +24,24 @@ export function GetViewPost(id, callback){
 		callback(false, e.message, null);
 	}
 }
+
+export function SubmitAdminLogin(password, callback){
+	try{
+		// make a post fetch at API + /admin with data {password: password}
+		fetch(API + '/admin', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				password: password
+			})
+		}).then(response => response.json())
+		.then(data => {
+			callback(data.success, data.message);
+		});
+	}catch(e){
+		callback(false, e.message);
+	}
+}

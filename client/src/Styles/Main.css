@@ -16,6 +16,8 @@
   --large-size: 2.5rem;
   --medium-size: 1.51rem;
 
+  --primary-color: #92c7f8; 
+  --panel-color: #d9cfc1;
   --gray-color: #c8b8ab;
   --dark-color: #48433b;
   --light-color: #eeeeee;
@@ -28,6 +30,7 @@
   --yellow-highlight: #d5e768;
 
   --padding: 2rem;
+  --radius: 1rem;
 }
 
 body {
