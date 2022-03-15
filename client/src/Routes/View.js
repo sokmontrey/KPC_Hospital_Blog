@@ -9,7 +9,7 @@ import { GetViewPost } from '../Controllers/FetchController.js';
 import '../Styles/View.css';
 
 export default function View(){
-	const [id] = useState(useParams().id);
+	const { id } = useParams();
 
 	const [postObj, setPostObj] = useState({
 		isFetchSuccess: false,
@@ -19,7 +19,7 @@ export default function View(){
 
 	useEffect(()=>{
 		_fetchViewPost(id, setPostObj);
-	}, [id]);
+	}, []);
 
 	return (<div id='view-container'>
 		<BackButton />
