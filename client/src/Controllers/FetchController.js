@@ -85,3 +85,42 @@ export function SubmitAdminLogin(password, callback){
 		callback(false, e.message);
 	}
 }
+
+export function CreateAdminPost(data, callback){
+	try{
+		fetch(API + '/admin/create',{
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'authorization': 'Bearer ' + localStorage.getItem('token')
+			},
+			body: JSON.stringify(data)
+		}).then(response => response.json())
+		.then(data=>{
+			callback(data.success, data.message, data.payload);
+		});
+	}catch(e){
+		callback(false, e.message, null);
+	}
+}
+
+export function UpdateAdminPost(id, data, callback){
+	try{
+		fetch(API + `/admin/update/${id}`,{
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'authorization': 'Bearer ' + localStorage.getItem('token')
+			},
+			body: JSON.stringify(data)
+		}).then(response => response.json())
+		.then(data=>{
+			callback(data.success, data.message, data.payload);
+		});
+	}catch(e){
+		callback(false, e.message, null);
+	}
+}
+

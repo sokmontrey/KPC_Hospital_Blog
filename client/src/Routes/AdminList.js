@@ -34,7 +34,7 @@ function AdminPostList(props){
 		{ adminPostObj.postList.map(post=> <AdminPost 
 			key={post._id}
 			title={post.title}
-			createAt={convertToHowLongDay(post.createAt)} 
+			createAt={post.createAt}
 			onEdit={()=>{_editPost(post._id)}}
 			onDelete={()=>{_deletePost(post._id, props.setAdminPostObj)}}
 		/>) }
@@ -63,7 +63,7 @@ function AdminPost(props){
 			</p>
 
 			<p className='bold-text gray small-text'>
-				{convertToHowLongDay(props.createAt)}
+				{convertToHowLongDay(props.createAt)} days ago
 			</p>
 		</div>
 

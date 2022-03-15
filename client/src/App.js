@@ -8,7 +8,7 @@ import Home from './Routes/Home.js';
 import View from './Routes/View.js';
 import AdminLogin from './Routes/AdminLogin.js';
 import AdminList from './Routes/AdminList.js';
-import AdminCreate from './Routes/AdminCreate.js';
+import AdminEdit from './Routes/AdminEdit.js';
 
 function App() {
 	return (<Routes>
@@ -20,7 +20,14 @@ function App() {
 
 		<Route path='/admin/list' exact element={<AdminList/>}/>
 
-		<Route path='/admin/create' exact element={<AdminCreate />}/>
+		<Route path='/admin/create' 
+			exact 
+			element={<AdminEdit isNew={true} />}
+		/>
+		<Route path='/admin/edit/:id'
+			exact
+			element={<AdminEdit isNew={false} />}
+		/>
 	</Routes>);
 }
 
