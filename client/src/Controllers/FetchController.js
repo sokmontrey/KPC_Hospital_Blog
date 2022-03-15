@@ -42,6 +42,27 @@ export function GetAdminPost(callback){
 		callback(false, e.message, null);
 	}
 }
+export function DeletePost(id, callback){
+	try{
+		fetch(API + '/admin/remove', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'authorization': 'Bearer ' + localStorage.getItem('token')
+			},
+			body: JSON.stringify({
+				id: id
+			})
+		}).then(response => response.json())
+		.then(data => {
+			//isSucces, message, isRemove
+			callback(data.success, data.message, data.payload);
+		});
+	}catch(e){
+		callback(false, e.message, null);
+	}
+}
 
 export function SubmitAdminLogin(password, callback){
 	try{
