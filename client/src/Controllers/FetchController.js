@@ -95,7 +95,7 @@ export function CreateAdminPost(data, callback){
 				'Content-Type': 'application/json',
 				'authorization': 'Bearer ' + localStorage.getItem('token')
 			},
-			body: JSON.stringify(data)
+			body: JSON.stringify({data: data})
 		}).then(response => response.json())
 		.then(data=>{
 			callback(data.success, data.message, data.payload);
@@ -114,7 +114,7 @@ export function UpdateAdminPost(id, data, callback){
 				'Content-Type': 'application/json',
 				'authorization': 'Bearer ' + localStorage.getItem('token')
 			},
-			body: JSON.stringify(data)
+			body: JSON.stringify({data:data})
 		}).then(response => response.json())
 		.then(data=>{
 			callback(data.success, data.message, data.payload);

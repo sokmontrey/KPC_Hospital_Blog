@@ -130,7 +130,7 @@ function _createPost(data, setFetchObj){
 			isFetchSuccess: !isSuccess,
 			message: isSuccess ? `created with id: ${id}` : message
 		});
-		window.location.href = `/admin/edit/${id}`;
+		//window.location.href = '/admin/list';
 	});
 }
 function _updatePost(id, data, setFetchObj){
@@ -141,7 +141,7 @@ function _updatePost(id, data, setFetchObj){
 			message: isSuccess && isUpdated 
 			? `updated with id: ${id}` : message
 		});
-		window.location.href = `/admin/edit/${id}`;
+		window.location.href = '/admin/list';
 	});
 }
 function _fetchPost(id, setFetchObj, setInput){
