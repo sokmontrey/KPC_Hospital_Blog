@@ -17,6 +17,13 @@ export default function AdminList(){
 	}, []);
 
 	return (<div id='adminList-container'>
+		<button 
+			onClick={_createPost}
+			className='button1'
+			id='admin-create-button'
+			> New
+		</button>
+
 		<Topbar isAdmin={true} />
 		<AdminPostList  
 			adminPostObj={adminPostObj}
@@ -40,9 +47,10 @@ function AdminPostList(props){
 		/>) }
 	</div>);
 }
-function _editPost(id){
 
-}
+function _createPost(){ window.location.href = '/admin/create'; }
+
+function _editPost(id){ window.location.href = `/admin/edit/${id}`; }
 
 function _deletePost(id, setAdminPostObj){
 	DeletePost(id, (isSuccess, message, isRemoved)=>{
