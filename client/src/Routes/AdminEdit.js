@@ -16,6 +16,7 @@ export default function AdminEdit(props){
 
 	const [fetchObj, setFetchObj] = useState({
 		isNew: isNew,
+		id: id,
 		isFetchSuccess: isNew,
 		message: isNew ? '' : 'loading...',
 	});
@@ -118,6 +119,19 @@ function PreviewContainer(props){
 	</div> );
 }
 
+function _createPost(input){
+	const data = input;
+	CreateAdminPost(data, (isSuccess, message, id)=>{
+		console.log({data, isSuccess, message, id});
+	});
+}
+function _updatePost(fetchObj, input){
+	const data = input,
+		id = fetchObj.id;
+	UpdateAdminPost(id, data, (isSuccess, message, isUpdated)=>{
+		console.log({data, isSuccess, message, isUpdated});
+	});
+}
 function _fetchPost(id, setFetchObj, setInput){
 	GetViewPost(id, (isSuccess, message, payload)=>{
 		setFetchObj({
