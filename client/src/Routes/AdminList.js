@@ -1,8 +1,8 @@
-//TODO confirm before delete
 import { useState, useEffect } from 'react';
-import { Topbar } from '../Components/Components.js';
+import { Topbar, ConfirmDialog } from '../Components/Components.js';
 import { convertToHowLongDay } from '../Controllers/Common.js';
 import { GetAdminPost, DeletePost } from '../Controllers/FetchController.js';
+import { confirmAlert } from 'react-confirm-alert';
 
 import '../Styles/Admin.css';
 
@@ -43,25 +43,25 @@ function AdminPostList(props){
 			key={post._id}
 			title={post.title}
 			createAt={post.createAt}
-			onEdit={()=>{_editPost(post._id)}}
-			onDelete={()=>{_deletePost(post._id, props.setAdminPostObj)}}
+			onEdit={()=>{
+				_editPost(post._id)
+			}}
+			onDelete={()=>{
+				confirmAlert({
+					customUI: ({ onClose }) => {
+						return ( <ConfirmDialog 
+							onNo={onClose}
+							onYes={()=>{
+								_deletePost(post._id, props.setAdminPostObj);
+								onClose();
+							}}
+							message='Please confirm to delete this post'
+						/> );
+					}
+				});
+			}}
 		/>) }
 	</div>);
-}
-
-function _createPost(){ window.location.href = '/admin/create'; }
-
-function _editPost(id){ window.location.href = `/admin/edit/${id}`; }
-
-function _deletePost(id, setAdminPostObj){
-	DeletePost(id, (isSuccess, message, isRemoved)=>{
-		if(isSuccess && isRemoved) _fetchAdminPost(setAdminPostObj);
-		else{
-			setAdminPostObj({isFetchSuccess: false, 
-				message: message, postList: []
-			});
-		}
-	});
 }
 
 function AdminPost(props){
@@ -85,6 +85,21 @@ function AdminPost(props){
 			</button>
 		</div>
 	</div>);
+}
+
+function _createPost(){ window.location.href = '/admin/create'; }
+
+function _editPost(id){ window.location.href = `/admin/edit/${id}`; }
+
+function _deletePost(id, setAdminPostObj){
+	DeletePost(id, (isSuccess, message, isRemoved)=>{
+		if(isSuccess && isRemoved) _fetchAdminPost(setAdminPostObj);
+		else {
+			setAdminPostObj({isFetchSuccess: false, 
+				message: message, postList: []
+			});
+		}
+	});
 }
 
 function _fetchAdminPost(setAdminPostObj){

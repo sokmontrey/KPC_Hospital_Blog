@@ -58,7 +58,6 @@ export function getMany(index, limit, callback){
 // params:
 // 		callback: (err, result: [{_id: String, title: String}])
 export function getAll_Title_CreateAt(callback){
-	console.log('something2');
 	PostModel.find({})
 		.sort({createAt: -1})
 		.select({_id: 1, title: 1, createAt: 1})

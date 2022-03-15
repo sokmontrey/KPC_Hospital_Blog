@@ -14,3 +14,20 @@
 	left: 0;
 	color: var(--less-dark-color);
 }
+.confirm-dialog-wrapper{
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.5);
+	width: 100vw;
+	height: 100vh;
+	z-index: 4;
+}
+.confirm-dialog-container{
+	padding: calc(var(--padding)*2);
+	background-color: var(--light-color);
+	border-radius: var(--radius);
+}
+.confirm-dialog-container button{
+	margin-left: calc(var(--padding));
+}

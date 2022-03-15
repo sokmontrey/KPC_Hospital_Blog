@@ -130,7 +130,7 @@ function _createPost(data, setFetchObj){
 			isFetchSuccess: !isSuccess,
 			message: isSuccess ? `created with id: ${id}` : message
 		});
-		//window.location.href = '/admin/list';
+		window.location.href = '/admin/list';
 	});
 }
 function _updatePost(id, data, setFetchObj){

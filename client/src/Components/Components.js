@@ -17,6 +17,17 @@ export function BackButton(){
 		back
 	</button>);
 }
+export function ConfirmDialog(props){
+	return ( <div className='confirm-dialog-wrapper row row-center row-middle'>
+		<div className='confirm-dialog-container row row-center row-middle'>
+			<p className='bold-text small-text less-black'>{props.message}</p>
+			<button className='button1 small-text' 
+			onClick={props.onYes}>Yes</button>
+			<button className='button1 small-text' 
+			onClick={props.onNo}>No</button>
+		</div>
+	</div> );
+}
 
 export function PostInfo(props){
 	return (<div onClick={props.onClick}
