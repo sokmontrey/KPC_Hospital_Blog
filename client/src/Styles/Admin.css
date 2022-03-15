@@ -41,7 +41,8 @@
 #admin-input-container{
 	padding: var(--padding);
 	padding-top: calc(var(--padding)*0.5);
-	flex: 9;
+	padding-right: calc(var(--padding)*0.4);
+	flex: 8;
 }
 #admin-input-container p{
 	margin-bottom: calc(var(--padding) *0.5);
@@ -50,15 +51,17 @@
 #admin-left-input-container input,
 #admin-left-input-container button{
 	margin-bottom: calc(var(--padding)*0.5);
+	padding: calc(var(--padding)*0.5);
 }
 
 #markdown-input-container{
 	flex: 1;
-	margin: 0 0 var(--padding) var(--padding);
+	margin: 0 0 var(--padding) calc(var(--padding)*0.4);
 }
-#markdown-input-container  .input1{
-	width: calc(100% - var(--padding) * 2);
-	height: 100%;
+#markdown-input-container .input1{
+	width: calc(100% - var(--padding));
+	height: calc(100% - var(--padding));
+	padding: calc(var(--padding)*0.5);
 }
 #admin-preview-container{
 	flex: 4;
@@ -67,5 +70,8 @@
 /*admin preview*/
 #admin-preview-container{
 	padding: calc(var(--padding)*0.5);
+}
+#admin-preview-container p{
+	padding-bottom: calc(var(--padding)*0.5);
 }
 
