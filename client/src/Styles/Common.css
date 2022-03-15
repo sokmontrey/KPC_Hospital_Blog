@@ -117,7 +117,7 @@
 
 	color: var(--dark-color);
 
-	font-size: var(--small-size);
+	font-size: calc(var(--small-size)*0.8);
 	font-family: var(--read-font);
 	font-weight: bold;
 }
