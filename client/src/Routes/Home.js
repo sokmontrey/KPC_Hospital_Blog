@@ -5,6 +5,7 @@ import { GetHomePost } from '../Controllers/FetchController.js';
 import '../Styles/Home.css';
 
 export default function Home(){
+	//TODO: next index when scroll to bottom
 	const [index, setIndex] = useState(0);
 	const [homePostObj, setHomePostObj] = useState({
 		isFetchSuccess: false,

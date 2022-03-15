@@ -9,6 +9,12 @@
 .row-middle {
   align-items: center;
 }
+.row-left {
+  justify-content: flex-start;
+}
+.row-right {
+  justify-content: flex-end;
+}
 
 .col {
   display: flex;
@@ -19,6 +25,12 @@
 }
 .col-center {
   align-items: center;
+}
+.col-left {
+  align-items: flex-start;
+}
+.col-right {
+  align-items: flex-end;
 }
 
 /* text */

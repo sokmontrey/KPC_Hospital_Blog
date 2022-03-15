@@ -10,3 +10,17 @@
 #adminLogin-container input{
 	margin: var(--padding) 0;
 }
+
+#adminPost-list-container{
+	padding: var(--padding);
+}
+.adminPost-container{
+	width: 40%;
+	padding: calc(var(--padding) *0.3);
+}
+.adminPost-left-container{
+	flex: 1;
+}
+.adminPost-container button{
+	margin: 0 calc(var(--padding) * 0.2);
+}

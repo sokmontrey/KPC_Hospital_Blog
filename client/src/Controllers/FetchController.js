@@ -27,11 +27,17 @@ export function GetViewPost(id, callback){
 
 export function GetAdminPost(callback){
 	try{
-		fetch(API + '/admin/list')
-			.then(response => response.json())
-			.then(data => {
-				callback(data.success, data.message, data.payload);
-			});
+		fetch(API + '/admin/list',{
+			method: 'GET',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'authorization': 'Bearer ' + localStorage.getItem('token')
+			}
+		}).then(response => response.json())
+		.then(data => {
+			callback(data.success, data.message, data.payload);
+		});
 	}catch(e){
 		callback(false, e.message, null);
 	}
@@ -39,7 +45,6 @@ export function GetAdminPost(callback){
 
 export function SubmitAdminLogin(password, callback){
 	try{
-		// make a post fetch at API + /admin with data {password: password}
 		fetch(API + '/admin', {
 			method: 'POST',
 			headers: {
@@ -51,6 +56,8 @@ export function SubmitAdminLogin(password, callback){
 			})
 		}).then(response => response.json())
 		.then(data => {
+			const accessToken = data.accessToken;
+			localStorage.setItem('token', accessToken);
 			callback(data.success, data.message);
 		});
 	}catch(e){
