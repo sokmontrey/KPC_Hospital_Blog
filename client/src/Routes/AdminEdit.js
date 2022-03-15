@@ -39,8 +39,8 @@ export default function AdminEdit(props){
 				input={input} 
 				setInput={setInput} 
 				onButtonClick={()=>{
-					if(isNew) _createPost(input);
-					else _updatePost(id, input);
+					if(isNew) _createPost(input, setFetchObj);
+					else _updatePost(id, input, setFetchObj);
 				}}
 			/>
 			<PreviewContainer 
@@ -123,14 +123,25 @@ function PreviewContainer(props){
 	</div> );
 }
 
-function _createPost(data){
+function _createPost(data, setFetchObj){
 	CreateAdminPost(data, (isSuccess, message, id)=>{
-		console.log({data, isSuccess, message, id});
+		setFetchObj({
+			isNew: true,
+			isFetchSuccess: !isSuccess,
+			message: isSuccess ? `created with id: ${id}` : message
+		});
+		window.location.href = `/admin/edit/${id}`;
 	});
 }
-function _updatePost(id, data){
+function _updatePost(id, data, setFetchObj){
 	UpdateAdminPost(id, data, (isSuccess, message, isUpdated)=>{
-		console.log({data, isSuccess, message, isUpdated});
+		setFetchObj({
+			isNew: false,
+			isFetchSuccess: !(isSuccess && isUpdated),
+			message: isSuccess && isUpdated 
+			? `updated with id: ${id}` : message
+		});
+		window.location.href = `/admin/edit/${id}`;
 	});
 }
 function _fetchPost(id, setFetchObj, setInput){
