@@ -16,7 +16,6 @@ export default function AdminEdit(props){
 
 	const [fetchObj, setFetchObj] = useState({
 		isNew: isNew,
-		id: id,
 		isFetchSuccess: isNew,
 		message: isNew ? '' : 'loading...',
 	});
@@ -39,6 +38,10 @@ export default function AdminEdit(props){
 				fetchObj={fetchObj} 
 				input={input} 
 				setInput={setInput} 
+				onButtonClick={()=>{
+					if(isNew) _createPost(input);
+					else _updatePost(id, input);
+				}}
 			/>
 			<PreviewContainer 
 				markdown={input.markdown}
@@ -70,7 +73,8 @@ function InputContainer(props){
 						setInput({...input, description: e.target.value})
 					}
 					placeholder='description...'/>
-				<button className='button1'>
+				<button className='button1'
+					onClick={props.onButtonClick}>
 					{fetchObj.isNew ? 'Post' : 'Update'}
 				</button>
 			</div>
@@ -119,15 +123,12 @@ function PreviewContainer(props){
 	</div> );
 }
 
-function _createPost(input){
-	const data = input;
+function _createPost(data){
 	CreateAdminPost(data, (isSuccess, message, id)=>{
 		console.log({data, isSuccess, message, id});
 	});
 }
-function _updatePost(fetchObj, input){
-	const data = input,
-		id = fetchObj.id;
+function _updatePost(id, data){
 	UpdateAdminPost(id, data, (isSuccess, message, isUpdated)=>{
 		console.log({data, isSuccess, message, isUpdated});
 	});
