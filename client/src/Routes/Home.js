@@ -17,6 +17,10 @@ export default function Home(){
 		_fetchHomePost(index, setHomePostObj);
 	}, [index]);
 
+	useEffect(()=>{
+		window.addEventListener('scroll', handleScroll);
+	}, []);
+
 	return ( <div id='home-container'>
 		<Topbar isAdmin={false} />
 		<div id='latest-text' className='row row-left row-middle'>
@@ -28,9 +32,22 @@ export default function Home(){
 	</div> );
 }
 
+function handleScroll(){
+	const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+	const body = document.body;
+	const html = document.documentElement;
+	const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+	const windowBottom = windowHeight + window.pageYOffset;
+	if (windowBottom >= docHeight) {
+		console.log('bottom');
+	}else if(window.pageYOffset === 0){
+		console.log('top');
+	}
+}
+
 function PostList(props){
 	const homePostObj = props.homePostObj;
-	if(!homePostObj.isFetchSuccess) return 'could not load data';
+	if(!homePostObj.isFetchSuccess) return homePostObj.message;
 	return homePostObj.postList.map(post=>
 		<PostInfo 
 			key={post._id}
@@ -45,7 +62,7 @@ function PostList(props){
 function _viewPost(id){ window.location.href = `/view/${id}`; }
 
 function _fetchHomePost(index, setHomePostObj){
-	const limit = 4;
+	const limit = 9;
 	GetHomePost(index, limit, (success, message, payload)=>{
 		setHomePostObj({
 			isFetchSuccess: success,

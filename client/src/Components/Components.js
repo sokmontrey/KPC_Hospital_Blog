@@ -34,7 +34,7 @@ export function PostInfo(props){
 		className='postInfo-container col col-middle col-left'>
 
 		<p className='style-text black'> 
-			{_markText(props.title)}
+			{props.mark?_markText(props.title):props.title}
 		</p>
 
 		<p className='read-text less-black'> {props.description} </p>

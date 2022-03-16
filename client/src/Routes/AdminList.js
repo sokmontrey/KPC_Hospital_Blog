@@ -47,18 +47,16 @@ function AdminPostList(props){
 				_editPost(post._id)
 			}}
 			onDelete={()=>{
-				confirmAlert({
-					customUI: ({ onClose }) => {
-						return ( <ConfirmDialog 
-							onNo={onClose}
-							onYes={()=>{
-								_deletePost(post._id, props.setAdminPostObj);
-								onClose();
-							}}
-							message='Please confirm to delete this post'
-						/> );
-					}
-				});
+				confirmAlert({ customUI: ({ onClose }) => {
+					return ( <ConfirmDialog 
+						onNo={onClose}
+						onYes={()=>{
+							_deletePost(post._id, props.setAdminPostObj);
+							onClose();
+						}}
+						message='Please confirm to delete this post'
+					/> );
+				} });
 			}}
 		/>) }
 	</div>);

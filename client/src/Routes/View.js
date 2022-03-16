@@ -30,7 +30,7 @@ export default function View(){
 }
 function MarkdownContainer(props){
 	const postObj = props.postObj;
-	if(!postObj.isFetchSuccess) return 'could not load data';
+	if(!postObj.isFetchSuccess) return postObj.message;
 	const splited = postObj.post.markdown.split('$image$');
 	//0: text, 1: image, 2: text
 	//odd: image, even: text
@@ -53,6 +53,7 @@ function PostInfoElement(props){
 	const postObj = props.postObj;
 	if(!postObj.isFetchSuccess) return 'could not load data';
 	return (<PostInfo 
+		mark={true}
 		title={postObj.post.title}
 		description={postObj.post.description}
 		createAt={postObj.post.createAt}
