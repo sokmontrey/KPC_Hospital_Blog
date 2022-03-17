@@ -12,7 +12,6 @@ export default function Home(){
 		message: '',
 		postList: []
 	});
-	const [lastId, setLastId] = useState('');
 	const [onLast, setOnLast] = useState(false);
 
 	const incrementIndex = useCallback(()=>{
@@ -25,15 +24,26 @@ export default function Home(){
 		_fetchHomePost(index, 
 			homePostObj, 
 			setHomePostObj, 
-			lastId,
-			setOnLast
 		);
 		window.addEventListener('scroll', incrementIndex);
-		if(homePostObj.postList>0)
-			setLastId(homePostObj.postList[homePostObj.postList.length-1]._id);
 
 		return ()=>{ window.removeEventListener('scroll', incrementIndex); }
 	}, [index]);
+
+	useEffect(()=>{
+		const postList = homePostObj.postList;
+		for(let i=0; i<postList.length-1; i++){
+			if(postList[i]._id === postList[i+1]._id){
+				setHomePostObj({
+					isFetchSuccess: true,
+					message: '',
+					postList: postList.slice(0, i+1)
+				});
+				setOnLast(true);
+			}
+		}
+		console.log(homePostObj);
+	}, [homePostObj]);
 
 	return ( <div id='home-container'>
 		<Topbar isAdmin={false} />
@@ -78,15 +88,10 @@ function _viewPost(id){ window.location.href = `/view/${id}`; }
 
 function _fetchHomePost(index, 
 	homePostObj, 
-	setHomePostObj, 
-	lastId,
-	setOnLast){
+	setHomePostObj){
 
 	const limit = 8;
 	GetHomePost(index, limit, (success, message, payload)=>{
-		for(let i=0; i<payload.length; i++){
-			if(payload[i]._id === lastId){setOnLast(true); return;}
-		}
 		setHomePostObj({
 			isFetchSuccess: success,
 			message: message,
