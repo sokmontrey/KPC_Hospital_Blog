@@ -11,10 +11,13 @@
   transform: translate(0, 0.2rem);
 }
 #latest-text {
-  padding-left: var(--padding);
+	width: 100%;
 }
-#post-list-container {
-  display: grid;
-  grid-template-columns: 33.33vw 33.33vw 33.33vw;
-  word-break: break-word;
+#list-container{
+	padding: 0 25%;
+	padding-top: var(--padding);
+	word-break: break-word;
+}
+#list-container .postInfo-container{
+	width: 100%;
 }

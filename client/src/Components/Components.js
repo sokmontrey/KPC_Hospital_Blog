@@ -29,11 +29,17 @@ export function ConfirmDialog(props){
 	</div> );
 }
 
+export function HorizontalLine(){
+	return (<div className='horizontal-line-container'>
+		<div className='horizontal-line'></div>
+	</div>);
+}
+
 export function PostInfo(props){
 	return (<div onClick={props.onClick}
 		className='postInfo-container col col-middle col-left'>
 
-		<p className='style-text black'> 
+		<p className='style-text primary-color'> 
 			{props.mark?_markText(props.title):props.title}
 		</p>
 
@@ -42,6 +48,7 @@ export function PostInfo(props){
 		<p className='bold-text gray small-text'> 
 			{convertToHowLongDay(props.createAt)} days ago
 		</p>
+		<HorizontalLine />
 	</div>); 
 }
 

@@ -62,6 +62,9 @@
 }
 
 /* color */
+.primary-color{
+	  color: var(--primary-color);
+}
 .gray {
   color: var(--gray-color);
 }

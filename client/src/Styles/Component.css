@@ -31,3 +31,14 @@
 .confirm-dialog-container button{
 	margin-left: calc(var(--padding));
 }
+
+.horizontal-line-container{
+	padding-top: var(--padding);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.horizontal-line{
+	width: 80%;
+	border-top: 0.15rem solid var(--gray-color);
+}
