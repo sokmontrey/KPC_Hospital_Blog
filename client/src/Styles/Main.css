@@ -31,8 +31,28 @@
 
   --padding: 2rem;
   --radius: 1rem;
+  --post-padding: 28%;
 }
 
 body {
   background-color: var(--back-color);
+}
+
+@media screen and (max-width: 1000px) {
+  :root {
+	--post-padding: 19%;
+	font-size: 13px;
+  }
+}
+@media screen and (max-width: 700px) {
+  :root {
+	--post-padding: 13%;
+	font-size: 12px;
+  }
+}
+@media screen and (max-width: 500px) {
+  :root {
+	--post-padding: 10%;
+	font-size: 11px;
+  }
 }

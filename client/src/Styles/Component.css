@@ -7,6 +7,8 @@
   padding-bottom: 0;
   margin: 0 calc(var(--padding) * 0.5);
   transition: all 0.3s ease-in-out;
+  break-word: break-word;
+  overflow: scroll;
 }
 
 .back-button-container{
