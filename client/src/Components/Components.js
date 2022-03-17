@@ -48,7 +48,7 @@ export function PostInfo(props){
 		<p className='bold-text gray small-text'> 
 			{convertToHowLongDay(props.createAt)} days ago
 		</p>
-		<HorizontalLine />
+		{props.underline?<HorizontalLine />:''}
 	</div>); 
 }
 

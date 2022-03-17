@@ -65,6 +65,7 @@ function PostList(props){
 	return homePostObj.postList.map((post,index)=> 
 		<PostInfo 
 			key={post._id}
+			underline={true}
 			title={post.title}
 			description={post.description}
 			createAt={post.createAt}

@@ -53,7 +53,7 @@ function PostInfoElement(props){
 	const postObj = props.postObj;
 	if(!postObj.isFetchSuccess) return 'could not load data';
 	return (<PostInfo 
-		mark={true}
+		underline={false}
 		title={postObj.post.title}
 		description={postObj.post.description}
 		createAt={postObj.post.createAt}
