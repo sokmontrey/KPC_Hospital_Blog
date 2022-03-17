@@ -62,7 +62,7 @@ function handleScroll(onBottom){
 function PostList(props){
 	const homePostObj = props.homePostObj;
 	if(!homePostObj.isFetchSuccess) return homePostObj.message;
-	return homePostObj.postList.map((post,index)=> 
+	return homePostObj.postList.map(post=> 
 		<PostInfo 
 			key={post._id}
 			underline={true}
