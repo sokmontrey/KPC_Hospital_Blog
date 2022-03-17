@@ -12,7 +12,7 @@ export function getHomePost(req, res){
 
 	getManyWithSelect(skip, limit, {
 		title: 1, createAt: 1,
-		description: 1, image: 1,
+		description: 1, images: 1,
 	}, (err, results)=>{
 		if(err) _sendResponse(res, false, err, null);
 		else _sendResponse(res, true, 'Succes', results);
