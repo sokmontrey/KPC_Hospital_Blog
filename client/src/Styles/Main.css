@@ -31,7 +31,7 @@
 
   --padding: 2rem;
   --radius: 1rem;
-  --post-padding: 28%;
+  --post-padding: 25%;
 }
 
 body {
@@ -40,7 +40,7 @@ body {
 
 @media screen and (max-width: 1000px) {
   :root {
-	--post-padding: 19%;
+	--post-padding: 20%;
 	font-size: 13px;
   }
 }
@@ -52,7 +52,7 @@ body {
 }
 @media screen and (max-width: 500px) {
   :root {
-	--post-padding: 10%;
+	--post-padding: 8%;
 	font-size: 11px;
   }
 }
