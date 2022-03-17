@@ -3,7 +3,12 @@ import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm';
 
-import { BackButton, Topbar, PostInfo } from '../Components/Components.js';
+import { 
+	BackButton, 
+	Topbar, 
+	PostInfo,
+	MarkdownRender
+} from '../Components/Components.js';
 import { GetViewPost } from '../Controllers/FetchController.js';
 
 import '../Styles/View.css';
@@ -25,27 +30,15 @@ export default function View(){
 		<BackButton />
 		<Topbar isAdmin={false} />
 		<PostInfoElement postObj={postObj}/>
-		<MarkdownContainer postObj={postObj} />
+		<div id='postMarkdown-container'>
+			{postObj.isFetchSuccess
+			?<MarkdownRender 
+					images={postObj.post.images} 
+					markdown={postObj.post.markdown}/>
+			:postObj.message
+			}
+		</div>
 	</div>);
-}
-function MarkdownContainer(props){
-	const postObj = props.postObj;
-	if(!postObj.isFetchSuccess) return postObj.message;
-	const splited = postObj.post.markdown.split('$image$');
-	//0: text, 1: image, 2: text
-	//odd: image, even: text
-	
-	const result = splited.map((item, index)=>{
-		if(!(index % 2) || !index) 
-			return ( <ReactMarkdown key={`markdown-${index}`} 
-				children={item} 
-				remarkPlugins={[remarkGfm]}/> );
-		else 
-			return ( <img key={`markdown-${index}`} alt={index} src={item}/> );
-	});
-	return ( <div id='postMarkdown-container'>
-		{result}
-	</div> );
 }
 
 function PostInfoElement(props){

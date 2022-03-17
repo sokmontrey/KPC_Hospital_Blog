@@ -1,4 +1,6 @@
 import { convertToHowLongDay } from '../Controllers/Common.js'; 
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export function Topbar(props){
 	return (<div className='topbar-container row row-middle row-center'>
@@ -65,4 +67,25 @@ function _markText(text){
 		</mark>
 		{theRest}
 	</>);
+}
+export function MarkdownRender(props){
+	const { markdown, images } = props;
+
+	const splited = markdown.split('$image$');
+	const result = splited.map((item, index)=>{
+		if(!(index % 2) || !index) {
+			return ( <ReactMarkdown key={`markdown-${index}`} 
+				children={item} 
+				remarkPlugins={[remarkGfm]}/> );
+		}else {
+			const image = images.find(image=>image.id==item);
+			return ( <img key={`markdown-${index}`} 
+				style={{width:'100%'}}
+				alt={item}
+				src={image?image.base64:''} />);
+		}
+	});
+	return ( <div className='col markdown-render-container'>
+		{result}
+	</div> );
 }

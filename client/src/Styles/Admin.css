@@ -48,14 +48,14 @@
 	margin-bottom: calc(var(--padding) *0.5);
 }
 
-#admin-left-input-container input,
-#admin-left-input-container button{
+#admin-left-top-input-container input,
+#admin-left-top-input-container button{
 	margin-bottom: calc(var(--padding)*0.5);
 	padding: calc(var(--padding)*0.5);
 }
 
 #markdown-input-container{
-	flex: 1;
+	flex: 5;
 	margin: 0 0 var(--padding) calc(var(--padding)*0.4);
 }
 #markdown-input-container .input1{
@@ -65,6 +65,30 @@
 }
 #admin-preview-container{
 	flex: 4;
+}
+/*admin images container*/
+.admin-images-container{
+	padding: calc(var(--padding)*0.3);
+	border-radius: var(--radius);
+	background-color: var(--panel-color);
+	justify-content: space-around !important;
+	margin: calc(var(--padding)*0.2) 0;
+	transition: all 0.1s ease-in-out;
+}
+.admin-images-container:hover{
+	transform: translate(0,-0.2rem);
+}
+.admin-images-container:active{
+	transform: translate(0,0.1rem);
+	content: "copied";
+}
+.admin-images-container p {
+	padding: 0rem;
+	margin-bottom: 0rem !important;
+	font-size: calc(var(--font-size) * 0.8);
+}
+.admin-image{
+	width: 15%;
 }
 
 /*admin preview*/

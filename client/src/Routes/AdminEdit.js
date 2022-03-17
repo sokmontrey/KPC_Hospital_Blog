@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Topbar, BackButton } from '../Components/Components.js';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { 
+	Topbar, 
+	BackButton, 
+	MarkdownRender 
+} from '../Components/Components.js';
 
 import { 
 	CreateAdminPost,
@@ -43,10 +45,14 @@ export default function AdminEdit(props){
 					else _updatePost(id, input, setFetchObj);
 				}}
 			/>
-			<PreviewContainer 
-				markdown={input.markdown}
-				fetchObj={fetchObj}
-			/>
+			<div id='admin-preview-container' className='col'>
+				<p className='bold-text small-text gray'>preview</p>
+				{fetchObj.isFetchSuccess ? 
+					<MarkdownRender 
+						markdown={input.markdown} 
+						images={input.images}
+					/> : fetchObj.message}
+			</div>
 		</div>
 	</div>);
 }
@@ -57,22 +63,20 @@ function InputContainer(props){
 		setInput = props.setInput;
 
 	return (<div className='row' id='admin-input-container'>
-		<div className='col'>
+		<div className='col' style={{flex:0}}>
 			<div className='col col-left col-middle' 
-				id='admin-left-input-container'>
+				id='admin-left-top-input-container'>
 				<p className='bold-text small-text gray'>post info</p>
-				<input className='input1'
-					value={input.title} 
+				<input className='input1' value={input.title} 
 					onChange={e=>
-						setInput({...input, title: e.target.value})
-					}
+						setInput({...input, title: e.target.value}) }
 					placeholder='title...'/>
-				<input className='input1'
-					value={input.description} 
+
+				<input className='input1' value={input.description} 
 					onChange={e=>
-						setInput({...input, description: e.target.value})
-					}
+						setInput({...input, description: e.target.value}) }
 					placeholder='description...'/>
+
 				<button className='button1'
 					onClick={props.onButtonClick}>
 					{fetchObj.isNew ? 'Post' : 'Update'}
@@ -81,10 +85,26 @@ function InputContainer(props){
 
 			<div className='col col-left col-middle'>
 				<p className='bold-text small-text gray'>images</p>
-				<input type='file' placeholder='add picture' />
-				<div className='col'>
-					{/*picture container*/}
-				</div>
+				<input type='file' 
+					onChange={(e)=>{
+						const file = e.target.files[0];
+						const reader = new FileReader();
+						reader.readAsDataURL(file);
+						reader.onload = ()=>{
+							const imageId = Date.now();
+							const images = input.images.concat([{
+								id: imageId,
+								base64: reader.result
+							}]);
+							setInput({...input, images: images});
+						};
+					}} 
+					placeholder='add picture' />
+				<ImageContainer onDelete={(index)=>{
+					const images = input.images.slice();
+					images.splice(index, 1);
+					setInput({...input, images: images});
+				}} images={input.images}/>
 			</div>
 		</div>
 		<div id='markdown-input-container'>
@@ -93,35 +113,44 @@ function InputContainer(props){
 				placeholder='markdown...' 
 				value={input.markdown}
 				onChange={e=>
-					setInput({...input, markdown: e.target.value})
-				}
+					setInput({...input, markdown: e.target.value}) }
 				className='input1'
 			/>
 		</div>
 	</div>);
 }
+function ImageContainer(props){
+	const images = props.images;
 
-function PreviewContainer(props){
-	const fetchObj = props.fetchObj;
-	if(!fetchObj.isFetchSuccess) return fetchObj.message;
-
-	const splited = props.markdown.split('$image$');
-	//0: text, 1: image, 2: text
-	//odd: image, even: text
-	
-	const result = splited.map((item, index)=>{
-		if(!(index % 2) || !index) 
-			return ( <ReactMarkdown key={`markdown-${index}`} 
-				children={item} 
-				remarkPlugins={[remarkGfm]}/> );
-		else 
-			return ( <img key={`markdown-${index}`} alt={index} src={item}/> );
-	});
-	return ( <div id='admin-preview-container' className='col'>
-		<p className='bold-text small-text gray'>preview</p>
-		{result}
-	</div> );
+	return (<div className='col' id='admin-images-list-container'>
+		{images.map((image,index)=>
+		<div key={image.id} className='row row-center row-middle'>
+			<div onClick={()=>{
+				//copy image.id to clipboard
+				const textArea = document.createElement('textarea');
+				textArea.value = image.id;
+				document.body.appendChild(textArea);
+				textArea.select();
+				document.execCommand('copy');
+				textArea.remove();
+			}} 
+				className='row row-center row-middle admin-images-container'>
+				<img alt={image.id} 
+					src={image.base64} 
+					className='admin-image'/>
+				<p className='read-text small-text less-black-color'>
+					{image.id}
+				</p>
+			</div>
+			<button className='button3' style={{
+				color: 'var(--red-highlight)', 
+				padding:'calc(var(--padding)*0.4)'
+			}}
+				onClick={()=>{props.onDelete(index)}}>x</button>
+		</div>)}
+	</div>);
 }
+
 
 function _createPost(data, setFetchObj){
 	CreateAdminPost(data, (isSuccess, message, id)=>{
