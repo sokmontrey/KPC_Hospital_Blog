@@ -4,7 +4,7 @@ const PostSchema = new mongoose.Schema({
 	description: {type: String, default: ''},
 	createAt: { type: Date, default: Date.now },
 	images: [{
-		url: {type:String, default: ''},
+		id: {type:String, default: ''},
 		base64: {type:String, default: ''}
 	}],
 	markdown: {type: String, default: ''},
