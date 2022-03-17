@@ -1,5 +1,5 @@
 import { 
-	getMany,
+	getManyWithSelect,
 	getOne,
 } from '../Controllers/DatabaseController.js';
 import { _sendResponse } from './commonRouteFunctions.js';
@@ -10,19 +10,12 @@ export function getHomePost(req, res){
 
 	var skip = index * limit;
 
-	getMany(skip, limit, (err, results)=>{
+	getManyWithSelect(skip, limit, {
+		title: 1, createAt: 1,
+		description: 1, image: 1,
+	}, (err, results)=>{
 		if(err) _sendResponse(res, false, err, null);
-		else {
-			const newList = results.map((post)=>{
-				return {
-					title: post.title,
-					description: post.description,
-					createAt: post.createAt,
-					_id: post._id
-				}
-			}) 
-			_sendResponse(res, true, 'Success', newList);
-		}
+		else _sendResponse(res, true, 'Succes', results);
 	});
 }
 export function viewPost(req, res){

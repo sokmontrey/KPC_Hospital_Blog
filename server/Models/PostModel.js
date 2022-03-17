@@ -3,7 +3,10 @@ const PostSchema = new mongoose.Schema({
 	title: {type: String, default: ''},
 	description: {type: String, default: ''},
 	createAt: { type: Date, default: Date.now },
-	images: [{type: String, default: ''}],
+	images: [{
+		url: {type:String, default: ''},
+		base64: {type:String, default: ''}
+	}],
 	markdown: {type: String, default: ''},
 });
 

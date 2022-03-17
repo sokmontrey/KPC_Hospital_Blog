@@ -41,18 +41,15 @@ export function getOne(id, callback){
 	});
 }
 
-// params: 
-// 		startIndex: Number 
-// 		resultLength: Number 
-// 		callback: (err, result: [Objects])
-export function getMany(index, limit, callback){
+export function getManyWithSelect(index, limit, select, callback){
 	PostModel.find({})
 		.sort({createAt: -1})
 		.skip(index)
 		.limit(limit)
+		.select({...select, _id: 1})
 		.exec((err, result)=>{
 			callback(err, result);
-		});
+		})
 }
 
 // params:
