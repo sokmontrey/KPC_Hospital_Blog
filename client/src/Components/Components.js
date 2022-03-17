@@ -41,6 +41,10 @@ export function PostInfo(props){
 	return (<div onClick={props.onClick}
 		className='postInfo-container col col-middle col-left'>
 
+		{props.isThumnail? <img src={props.thumnail} className='postInfo-image' 
+			alt={props.title}/>
+			:''
+		}
 		<p className='style-text primary-color'> 
 			{props.mark?_markText(props.title):props.title}
 		</p>

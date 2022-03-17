@@ -42,7 +42,6 @@ export default function Home(){
 				setOnLast(true);
 			}
 		}
-		console.log(homePostObj);
 	}, [homePostObj]);
 
 	return ( <div id='home-container'>
@@ -76,6 +75,8 @@ function PostList(props){
 		<PostInfo 
 			key={post._id}
 			underline={true}
+			isThumnail={true}
+			thumnail={post.images.length>0?post.images[0].base64: ''}
 			title={post.title}
 			description={post.description}
 			createAt={post.createAt}
