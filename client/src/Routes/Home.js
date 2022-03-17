@@ -84,7 +84,7 @@ function _fetchHomePost(index,
 	const limit = 3;
 	GetHomePost(index, limit, (success, message, payload)=>{
 		for(let i=0; i<payload.length; i++){
-			if(payload[i]._id === lastId) setOnLast(true); return;
+			if(payload[i]._id === lastId){setOnLast(true); return;}
 		}
 		setHomePostObj({
 			isFetchSuccess: success,
