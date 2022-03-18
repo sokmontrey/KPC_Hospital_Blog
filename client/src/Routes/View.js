@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from 'remark-gfm';
 
 import { 
 	BackButton, 
@@ -31,12 +29,10 @@ export default function View(){
 		<Topbar isAdmin={false} />
 		<PostInfoElement postObj={postObj}/>
 		<div id='postMarkdown-container'>
-			{postObj.isFetchSuccess
-			?<MarkdownRender 
+			{ postObj.isFetchSuccess ?<MarkdownRender 
 					images={postObj.post.images} 
 					markdown={postObj.post.markdown}/>
-			:postObj.message
-			}
+			:postObj.message }
 		</div>
 	</div>);
 }

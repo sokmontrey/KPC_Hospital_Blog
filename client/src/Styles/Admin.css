@@ -62,6 +62,7 @@
 	width: calc(100% - var(--padding));
 	height: calc(100% - var(--padding));
 	padding: calc(var(--padding)*0.5);
+	font-size: var(--small-size);
 }
 #admin-preview-container{
 	flex: 4;

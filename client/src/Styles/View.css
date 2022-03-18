@@ -1,5 +1,5 @@
 #view-container{
-	padding: 0 calc(var(--post-padding)*0.7);
+	padding: 0 calc(var(--post-padding));
 }
 
 #view-container .postInfo-container{
@@ -8,4 +8,5 @@
 
 #postMarkdown-container{
 	padding: 0 var(--padding);
+	padding-bottom: calc(var(--padding)*2);
 }

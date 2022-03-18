@@ -74,6 +74,7 @@ function _markText(text){
 }
 export function MarkdownRender(props){
 	const { markdown, images } = props;
+	console.log(images);
 
 	const splited = markdown.split('$image$');
 	const result = splited.map((item, index)=>{
